@@ -1,3 +1,69 @@
+Steps to get going fast with *stream-m* project 
+===============
+
+## Clone & Import project 
+  1. Git clone the project.
+  2. Open *gradle.build* file from the root of the project from IntelliJ IDEA.
+  
+## Run the project 
+  1. After the project is successfully imported go to *Add Configuration* 
+    ![add](readme-images/add-configuration.png)
+  2. Add an *Application* template with the following details : 
+    ![edit](readme-images/edit-configuration.png)
+  3. Save it and run it.  
+     >It can also be started in debug mode this way.  
+     This is why we are not the running the *jar* that would be generated at build.
+
+## Use the project 
+ #### Stream a video
+   1. Go to the /videos folder.
+   2. Assuming you have FFMPEG installed run the following command :  
+            
+            ffmpeg -re -i univac.webm -vcodec copy -acodec copy \
+               -f webm http://localhost:8080/publish/first?password=secret
+   3. In order to see the the video go to the following URL. 
+     
+            http://localhost:8080/consume/first  
+      >You should be able to see the video specified as parameter **univac.webm** streamed live : 
+        
+ ### Live stream from your own camera
+ ##### MacOs Steps (webm) :  
+ 1. Run the following command in order to obtain the id of the built-in iMac camera :  
+ 
+        ffmpeg -f avfoundation -list_devices true -i ""
+    This command will have the following output :  
+    ![edit](readme-images/output.png)
+ 2. As you can see the FaceTime HD Camera (Built-in) has the id "0".
+    We will use this value in order to create the following **FFMPEG** command :  
+        
+        ffmpeg -f avfoundation -s 320x240 -r 25 -i "0" -f \
+         52 -acodec libvorbis -ab 64k -vcodec libvpx -vb 448k \
+        -f webm http://localhost:8080/publish/first?password=secret
+    > This command will use our specified driver with the id 0 and it will publish it on the specified endpoint at the end of the command  
+    
+    > AVFoundation is the full featured framework for working with time-based audiovisual media on iOS.  
+    
+    > For Windows, **dshow** is specified in the command as it is a multimedia framework and API produced by Microsoft for software developers to perform various operations with media files or streams.  
+    However, in order to start a stream on Windows os you can't just replace the avfoundation command with dshow.  
+    
+    > For Linux, video4linux2 is used as it is Video4Linux (V4L for short) is a collection of device drivers and an API for supporting realtime video capture on Linux systems.
+    However, in order to start a stream on Linux os you can't just replace the avfoundation command with dshow.  
+
+ 3. In order to see the output of the stream go to the following link :  
+        
+        http://localhost:8080/consume/first
+
+        
+        
+  
+ 
+    
+
+
+
+
+
+
 README
 =======
 
