@@ -1,0 +1,6 @@
+./ffmpeg -f dshow -s 320x240 -r 16  -i video="Integrated Camera":audio="Microphone Array (Realtek High Definition Audio)" -g 52 -strict experimental  -acodec aac -ab 56k -vcodec libx264 -vb 452k  -profile:v high -pix_fmt yuv420p -level 40 -r 16  -f flv "rtmp://localhost:8081/publish/first?secret"
+
+
+ ./ffmpeg -f dshow -s 320x240 -r 16 -i video="Integrated Camera":audio="Microphone Array (Realtek High Definition Audio)" -g 52 -acodec libvorbis -ab 64k -vcodec libvpx -vb 448k -f webm http://localhost:8080/publish/first?password=secret
+
+./ffmpeg -re -i univac.webm -vcodec copy -acodec copy -f webm http://localhost:8080/publish/first?password=secret
