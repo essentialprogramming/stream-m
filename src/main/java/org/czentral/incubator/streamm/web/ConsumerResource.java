@@ -73,6 +73,8 @@ public class ConsumerResource implements HTTPResource {
         if (crossOriginProp != null) {
             response.setParameter("Access-Control-Allow-Origin", crossOriginProp);
             response.setParameter("Access-Control-Expose-Headers", STR_X_SEQUENCE);
+            response.setParameter("Access-Control-Allow-Headers", "origin, content-type, accept, authorization,  X-Requested-With, Content-Length");
+            response.setParameter("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
         }
 
         // setting rsponse content-type
