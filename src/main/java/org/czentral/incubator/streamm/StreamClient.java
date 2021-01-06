@@ -59,7 +59,7 @@ public class StreamClient {
         
         // report the starting of this client
         stream.postEvent(new ServerEvent(this, stream, ServerEvent.CLIET_START));
-        
+        System.out.println("Request received");
         if (sendHeader) {
             
             // waiting for header
@@ -100,7 +100,7 @@ public class StreamClient {
         // sending fragments
         int nextSequence = requestedFragmentSequence;
         while (runs && stream.isRunning()) {
-            
+            System.out.println("Looping..");
             boolean fragmentSent = false;
                     
             // while there is a new fragment is available
@@ -114,7 +114,9 @@ public class StreamClient {
                     stream.postEvent(new ServerEvent(this, stream, ServerEvent.CLIET_FRAGMENT_SKIP));
                 
                 nextSequence = streamAge + 1;
-                
+
+                System.out.println("Next fragment: " + nextSequence);
+
                 // getting current movie fragment
                 MovieFragment fragment = stream.getFragment();
                 
